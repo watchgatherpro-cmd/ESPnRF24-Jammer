@@ -1,0 +1,29 @@
+name: Build ESPnRF24 Jammer
+
+on:
+  push:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: pip install platformio
+
+      - name: Build Firmware
+        run: pio run -e esp32s3-devkitc-1
+
+      - name: Upload Firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: jammer-firmware
+          path: .pio/build/esp32s3-devkitc-1/firmware.bin
