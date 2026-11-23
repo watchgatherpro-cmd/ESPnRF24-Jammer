@@ -23,6 +23,7 @@
 #include "src/server.h"
 #include "src/display.h"
 #include "src/radio.h"
+#include <WiFi.h>
 
 volatile bool jammerStopFlag = false;
 #if defined(ALLOW_SLEEP)
